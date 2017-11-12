@@ -124,8 +124,9 @@ CONST AtkWepHand0 = 145
 CONST AtkWepHand1 = 146
 CONST AtkTurnDelay = 147
 CONST AtkDramaticPause = 148
+CONST AtkRandomization = 149
 
-'Next menu item is 148 (remember to update MnuItems)
+'Next menu item is 150 (remember to update MnuItems)
 
 
 '--Offsets in the attack data record (combined DT6 + ATTACK.BIN)
@@ -197,6 +198,7 @@ CONST AtkDatWepHand1X = 317
 CONST AtkDatWepHand1Y = 318
 CONST AtkDatTurnDelay = 319
 CONST AtkDatDramaticPause = 320
+CONST AtkDatRandomization = 337
 
 'anything past this requires expanding the data
 
@@ -311,7 +313,7 @@ atk_chain_bitset_names(3) = "Don't retarget if target is lost"
 '----------------------------------------------------------
 DIM recbuf(40 + curbinsize(binATTACK) \ 2 - 1) as integer '--stores the combined attack data from both .DT6 and ATTACK.BIN
 
-CONST MnuItems = 148
+CONST MnuItems = 149
 DIM menu(MnuItems) as string
 DIM menutype(MnuItems) as integer
 DIM menuoff(MnuItems) as integer
@@ -322,8 +324,8 @@ DIM menucapoff(MnuItems) as integer
 
 DIM capindex as integer = 0
 REDIM caption(-1 TO -1) as string
-DIM max(42) as integer
-DIM min(42) as integer
+DIM max(43) as integer
+DIM min(43) as integer
 
 'Limit(0) is not used
 
@@ -639,7 +641,10 @@ min(AtkLimTurnDelay) = 0
 CONST AtkLimDramaticPause = 42
 max(AtkLimDramaticPause) = 1000
 
-'next limit is 43 (remember to update the dim)
+CONST AtkLimRandomization = 43
+max(AtkLimRandomization) = 100
+
+'next limit is 44 (remember to update the dim)
 
 '----------------------------------------------------------------------
 '--menu content
@@ -1031,6 +1036,11 @@ menu(AtkDramaticPause) = "Dramatic Pause Ticks:"
 menutype(AtkDramaticPause) = 19'ticks
 menuoff(AtkDramaticPause) = AtkDatDramaticPause
 menulimits(AtkDramaticPause) = AtkLimDramaticPause
+
+menu(AtkRandomization) = "Randomize Damage:"
+menutype(AtkRandomization) = 17'int%
+menuoff(AtkRandomization) = AtkDatRandomization
+menulimits(AtkRandomization) = AtkLimRandomization
 
 '----------------------------------------------------------
 '--menu structure
@@ -1707,6 +1717,7 @@ SUB attack_editor_build_damage_menu(recbuf() as integer, menu() as string, menut
   DIM i as integer
   DIM attack as AttackData
   convertattackdata(recbuf(), attack)
+debug "attack.randomization " & attack.randomization & " " & recbuf(337)
   DIM targetstat as string = caption(menucapoff(AtkTargStat) + attack.targ_stat)
   DIM iselemental as integer = NO
   DIM target_is_register as integer = NO
@@ -1842,7 +1853,7 @@ SUB attack_editor_build_damage_menu(recbuf() as integer, menu() as string, menut
       END IF
 
       IF attack.do_not_randomize = NO THEN
-        preview += !"\nDMG = DMG +/- 20%"
+        preview += !"\nDMG = DMG +/- " & attack.randomization & "%"
       END IF
 
       'If the attack is actually spreadable (Spread or Optional Spread)
@@ -1917,6 +1928,10 @@ SUB attack_editor_build_damage_menu(recbuf() as integer, menu() as string, menut
     END IF
     workmenu(nextslot) = AtkExtraDamage  'Extra damage %
     nextslot += 1
+    IF NOT attack.do_not_randomize THEN
+      workmenu(nextslot) = AtkRandomization  'Randomization
+      nextslot += 1
+    END IF
     workmenu(nextslot) = AtkDamageBitAct 'Damage bitsets menu
     nextslot += 1
 
