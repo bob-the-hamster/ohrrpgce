@@ -1,5 +1,5 @@
 # bobthehamster/ohrrpgce-build-env
-# Begin with the freebasic image, (which is in turn based on debian:jessie-slim)
+# Begin with the freebasic image, (which is in turn based on debian:stretch-slim)
 
 FROM bobthehamster/freebasic
 
@@ -9,7 +9,8 @@ FROM bobthehamster/freebasic
 # We don't bother with timidity or freepats because those
 # are really run-time requirements, not build-time.
 
-RUN apt-get update \
+RUN dpkg --add-architecture i386 \
+    && apt-get update \
     && apt-get install -y --no-install-recommends \
       git \
       subversion \
