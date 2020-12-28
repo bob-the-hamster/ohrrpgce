@@ -45,9 +45,9 @@ pipeline {
         }
         stage('build-ohrrpgce') {
             agent { docker { image 'bobthehamster/ohrrpgce-build-env' } }
-            environment {
-                OHR_SKIP_X86 = "yes"
-            }
+            //environment {
+            //    OHR_SKIP_X86 = "yes"
+            //}
             steps {
                 sh './distrib-linux.sh'
                 sh 'ls -l distrib/'
