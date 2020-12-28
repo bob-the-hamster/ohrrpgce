@@ -38,13 +38,18 @@ pipeline {
                 sh 'docker build --tag bobthehamster/ohrrpgce-build-env ./docker/ohrrpgce-build-env/'
             }
         }
+        stage('docker-image-ohrrpgce-mxe') {
+            steps {
+                sh 'docker build --tag bobthehamster/ohrrpgce-mxe-build-env ./docker/ohrrpgce-mxe-build-env/'
+            }
+        }
         stage('cleanup-distrib') {
             steps {
                 sh 'rm -f distrib/*'
             }
         }
         stage('build-ohrrpgce') {
-            agent { docker { image 'bobthehamster/ohrrpgce-build-env' } }
+            agent { docker { image 'bobthehamster/ohrrpgce-mxe-build-env' } }
             //environment {
             //    OHR_SKIP_X86 = "yes"
             //}
