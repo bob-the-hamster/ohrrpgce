@@ -484,6 +484,7 @@ def verprint(mod, builddir, rootdir):
         "long_version=%(long_version)s",
         "build_date=%(date)s",
         "svn_rev=%(rev)s",
+        "revision=%(rev)s",
         "code_name=%(codename)s",
         "branch_name=%(branch_name)s",
         "arch=%(arch)s",
