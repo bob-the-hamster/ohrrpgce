@@ -17,7 +17,7 @@ Prerequisites
 * Make a copy of inventory.yml and customize it for your mac an your user
 
 This does not check out a copy of the OHRRPGCE source code for you,
-you can do that yourself with git or svn
+you can do that yourself with git
 
 Stuff is installed by default to ~/src/ohrmac/
 
