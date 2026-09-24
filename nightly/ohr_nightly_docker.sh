@@ -43,7 +43,7 @@ fi
 # Run Linux 64 bit nightly build in docker
 ~/src/nightly/ohr-linux-64/nightly/wrap-nightly-linux-x86_64.sh > /dev/null 2>&1
 
-# After the nightly build finishes, generate nightly-check.ini listing the svn_rev
+# After the nightly build finishes, generate nightly-check.ini listing the revision
 # and build_date for the main builds, and upload and email it
 
 SCRIPT_DIR=$(dirname "$0")

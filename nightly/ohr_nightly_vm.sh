@@ -25,7 +25,7 @@ for VMNAME in "Windows 7" "Mac OS X" ; do
   done
 done
 
-# After the nightly build finishes, generate nightly-check.ini listing the svn_rev
+# After the nightly build finishes, generate nightly-check.ini listing the revision
 # and build_date for the main builds, and upload and email it
 
 SCRIPT_DIR=$(dirname "$0")
