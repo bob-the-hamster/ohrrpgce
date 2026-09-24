@@ -1,6 +1,6 @@
 CrashRpt*.dll and CrashSender*.exe are part of The CrashRpt Project
 http://crashrpt.sourceforge.net/
-(or a fork thereof, see svn/git log for details. Currently, source code can be
+(or a fork thereof, see git log for details. Currently, source code can be
 obtained at https://github.com/rversteegen/crashrpt2/tree/v1403_minimised)
 
 Copyright (c) 2003, The CrashRpt Project Authors.
