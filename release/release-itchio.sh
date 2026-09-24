@@ -57,7 +57,7 @@ if [ ! -f "releases/buildinfo.ini" ] ; then
   exit 1
 fi
 BUILD_DATE=$( grep "^build_date=" "releases/buildinfo.ini" | cut -d "=" -f 2 )
-REV=$( grep "^svn_rev=" "releases/buildinfo.ini" | cut -d "=" -f 2 )
+REV=$( grep "^revision=" "releases/buildinfo.ini" | cut -d "=" -f 2 )
 CODE_NAME=$( grep -a "^code_name=" "releases/buildinfo.ini" | cut -d "=" -f 2 )
 VERSION_NAME="${CODE_NAME}_${BUILD_DATE}.${REV}"
 echo $VERSION_NAME | iconv -f ISO-8859-1 -t UTF-8 - > buildnumber.txt

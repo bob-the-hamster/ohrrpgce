@@ -30,7 +30,7 @@ for NAME in "ohrrpgce-player-win-wip-sdl2.zip" \
   if [ "$EXT" = "tar.gz" ] ; then
     tar -z -x "buildinfo.ini" -f "./tmp/$NAME"
   fi
-  grep -e "build_date" -e "svn_rev" buildinfo.ini | sed 's/^/  /'
+  grep -e "build_date" -e "revision" buildinfo.ini | sed 's/^/  /'
   rm -f buildinfo.ini
   rm -Rf ./tmp
 

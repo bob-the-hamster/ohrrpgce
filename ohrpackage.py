@@ -580,7 +580,7 @@ def format_output_filename(template, buildinfo, srcdir = '.'):
     return template.format(
         TODAY = today, DATE = builddate, CODENAME = buildinfo['code_name'],
         BUILDNAME = buildinfo['build_name'], BRANCH = buildinfo['branch_name'],
-        ARCH = buildinfo['arch'], REV = buildinfo['svn_rev'])
+        ARCH = buildinfo['arch'], REV = buildinfo['revision'])
 
 def package(target, config, outfile = None, extrafiles = [], iscc = "iscc"):
     if target == "web" and config not in ["player"]:
